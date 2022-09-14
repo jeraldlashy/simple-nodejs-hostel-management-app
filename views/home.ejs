@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LMS</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Book Student</h1>
+
+    <form action="/" method="post"> <br><br>
+        <input type="text" placeholder="Name" name="name">
+        <input type="text" placeholder="Roll No." name="rollNo"><br><br>
+        <input type="text" placeholder="DOB" name="dateOfBirth">
+        <input type="text" placeholder="City" name="city"><br><br>
+        <input type="text" placeholder="Number" name="number">
+        <input type="text" placeholder="Father's Number" name="fatherNumber"><br><br>
+        <input type="text" placeholder="Room No." name="roomNo">
+        <input type="text" placeholder="Hostel Name" name="hostelName"><br><br>
+        <button type="submit">Add</button>
+    </form>
+
+
+    <h1>All Bookings</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Roll No.</th>
+            <th>Room No</th>
+            <th>Hostel Name</th>
+            <th>More Info.</th>
+            <th>Update Room No.</th>
+            <th>Delete</th>
+        </tr>
+        <% data.forEach(element=> { %>
+            <tr>
+                <td>
+                    <%= element.name %>
+                </td>
+                <td>
+                    <%= element.rollNo %>
+                </td>
+                <td>
+                    <%= element.roomNo %>
+                </td>
+                <td>
+                    <%= element.hostelName %>
+                </td>
+                <td>
+                    <form action="/information" method="post">
+                        <input type="number" style="display: none;"
+                            name="rollNo" value="<%= element.rollNo %>">
+                        <button type="submit">More Info.</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/update" method="post">
+                        <input type="number" style="display: none;"
+                            name="rollNo" value="<%= element.rollNo %>">
+                        <input type="number" name="newroomno">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="post">
+                        <input type="number" style="display: none;"
+                            name="rollNo" value="<%= element.rollNo %>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+
+</body>
+
+</html>
